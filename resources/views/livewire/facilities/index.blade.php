@@ -17,10 +17,21 @@
                         class="absolute inset-0 bg-gradient-to-br from-medical-light-blue/30 to-medical-light-green/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     </div>
                     <div class="relative z-10 flex flex-col justify-between items-end h-full">
-                        @if (file_exists(public_path($facility->logo_rs ?? null)))
+                        @php
+                            $path = $facility->logo_rs; // misal "logo-rs/rs-a.png"
+                            $isLocal = file_exists(public_path($path));
+                            $isUrl = filter_var($path, FILTER_VALIDATE_URL);
+                        @endphp
+                        @if ($isLocal)
                             <div
                                 class="w-20 h-20 bg-gradient-to-br from-slate-100 to-sky-100 rounded-2xl flex items-center justify-center mb-6 mx-auto shadow-lg">
                                 <img src="{{ asset($facility->logo_rs) }}" alt="{{ $facility->nama_rs }}"
+                                    class="w-12 h-12 object-contain" />
+                            </div>
+                        @elseif ($isUrl)
+                            <div
+                                class="w-20 h-20 bg-gradient-to-br from-slate-100 to-sky-100 rounded-2xl flex items-center justify-center mb-6 mx-auto shadow-lg">
+                                <img src="{{ $facility->logo_rs }}" alt="{{ $facility->nama_rs }}"
                                     class="w-12 h-12 object-contain" />
                             </div>
                         @else
