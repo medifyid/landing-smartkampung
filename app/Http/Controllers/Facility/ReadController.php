@@ -10,20 +10,28 @@ class ReadController extends Controller
 {
     public function getFacilities(string $term = '')
     {
-        $path = base_path('settings/facilites/index.json');
+        try {
+            $path = base_path('settings/facilites/index.json');
 
-        $json = File::get($path);
-        $data = collect(json_decode($json));
+            if (!File::exists($path)) {
+                return collect([]);
+            }
 
-        if (!empty($term)) {
-            $term = strtolower($term);
+            $json = File::get($path);
+            $data = collect(json_decode($json));
 
-            $data = $data->filter(function ($item) use ($term) {
-                return str_contains(strtolower($item->nama_rs), $term)
-                    || str_contains(strtolower($item->keterangan), $term);
-            });
+            if (!empty($term)) {
+                $term = strtolower($term);
+
+                $data = $data->filter(function ($item) use ($term) {
+                    return str_contains(strtolower($item->nama_rs), $term)
+                        || str_contains(strtolower($item->keterangan), $term);
+                });
+            }
+
+            return $data->values();
+        } catch (\Throwable $th) {
+            return collect([]);
         }
-
-        return $data->values();
     }
 }
