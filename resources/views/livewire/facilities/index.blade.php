@@ -26,18 +26,28 @@
                         @else
                             <div
                                 class="w-20 h-20 bg-gradient-to-br from-medical-blue to-blue-600 rounded-2xl flex items-center justify-center mb-6 mx-auto shadow-lg">
-                                <i class="fa-solid fa-hospital text-white text-2xl"></i>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                    class="size-6 fill-white">
+                                    <path
+                                        d="M14.916 2.404a.75.75 0 0 1-.32 1.011l-.596.31V17a1 1 0 0 1-1 1h-2.26a.75.75 0 0 1-.75-.75v-3.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.5a.75.75 0 0 1-.75.75h-3.5a.75.75 0 0 1 0-1.5H2V9.957a.75.75 0 0 1-.596-1.372L2 8.275V5.75a.75.75 0 0 1 1.5 0v1.745l10.404-5.41a.75.75 0 0 1 1.012.319ZM15.861 8.57a.75.75 0 0 1 .736-.025l1.999 1.04A.75.75 0 0 1 18 10.957V16.5h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1-.75-.75V9.21a.75.75 0 0 1 .361-.64Z" />
+                                </svg>
+
                             </div>
                         @endif
                         <div class="text-center mb-6">
                             <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ $facility->nama_rs }}</h3>
                             <p class="text-sm text-gray-500 leading-relaxed">{{ $facility->keterangan }}</p>
                         </div>
-                        <button
-                            class="w-full bg-gradient-to-r from-medical-blue to-blue-600 hover:from-blue-700 hover:to-blue-800 text-white py-3 px-6 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                            <i class="fa-solid fa-arrow-right mr-2"></i>
+                        <a href="{{ $facility->url_rs }}" target="_blank"
+                            class="w-full flex items-center justify-center bg-gradient-to-r from-medical-blue text-center to-blue-600 hover:from-blue-700 hover:to-blue-800 text-white py-3 px-6 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                class="size-5 mr-2">
+                                <path fill-rule="evenodd"
+                                    d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z"
+                                    clip-rule="evenodd" />
+                            </svg>
                             Pilih RS
-                        </button>
+                        </a>
                     </div>
                 </div>
             @endforeach
