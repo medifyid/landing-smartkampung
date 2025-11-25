@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'medify_encryption' => 'x-medify-bridging-key-x',
+
 ];
