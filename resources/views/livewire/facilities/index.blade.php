@@ -49,7 +49,24 @@
                             <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ $facility->nama_rs }}</h3>
                             <p class="text-sm text-gray-500 leading-relaxed">{{ $facility->keterangan }}</p>
                         </div>
-                        <a href="{{ $facility->url_rs }}?medify_landingpage_key={{ custom_encrypt('medify-landingpage:' . $facility->nama_rs) }}"
+                        @php
+                            $param_request = [];
+                            $url = rtrim($facility->url_rs, '/');
+                            $services = [
+                                'pendaftaran' => '/rawatjalan/transaksi/form',
+                                'antrian' => '/rawatjalan/antrian',
+                                'ketersediaan_ranap' => '/rawatinap/ketersediaan-bed',
+                                'antrian_obat' => '/farmasi/antrian-obat',
+                                '10_besar_penyakit' => '/10-besar-penyakit',
+                            ];
+
+                            $service = '';
+                            if (request()->has('service') && !empty(request('service'))) {
+                                $service = $services[request('service')] ?? '';
+                            }
+                            $target_url = $url . $service;
+                        @endphp
+                        <a href="{{ $target_url }}?medify_landingpage_key={{ custom_encrypt('medify-landingpage:' . $facility->nama_rs) }}"
                             target="_blank"
                             class="w-full flex items-center justify-center bg-gradient-to-r from-medical-blue text-center to-blue-600 hover:from-blue-700 hover:to-blue-800 text-white py-3 px-6 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
